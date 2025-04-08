@@ -1,3 +1,1 @@
-export function TodoPage () {
-  
-}
+export function TodoPage() {}

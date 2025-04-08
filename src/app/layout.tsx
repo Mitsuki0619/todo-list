@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import AppLayout from "@/components/layout/AppLayout";
+import { UserProvider } from "@/lib/auth";
+import { getUser } from "@/lib/db/queries";
 
 export const metadata: Metadata = {
   title: "TODOリスト",
@@ -11,9 +14,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const userPromise = getUser();
   return (
     <html lang="ja">
-      <body>{children}</body>
+      <body>
+        <UserProvider userPromise={userPromise}>
+          <AppLayout>{children}</AppLayout>
+        </UserProvider>
+      </body>
     </html>
   );
 }

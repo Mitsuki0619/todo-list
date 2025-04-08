@@ -9,42 +9,42 @@ import { redirect } from "next/navigation";
 import { db } from "@/lib/db/drizzle";
 
 export const login = async (_: unknown, formData: FormData) => {
-  const submission = parseWithZod(formData, {
-    schema: loginSchema,
-  });
+	const submission = parseWithZod(formData, {
+		schema: loginSchema,
+	});
 
-  if (submission.status !== "success") {
-    return submission.reply();
-  }
+	if (submission.status !== "success") {
+		return submission.reply();
+	}
 
-  const { email, password } = submission.value;
+	const { email, password } = submission.value;
 
-  const foundUsers = await db
-    .select({
-      user: users,
-    })
-    .from(users)
-    .where(eq(users.email, email))
-    .limit(1);
+	const foundUsers = await db
+		.select({
+			user: users,
+		})
+		.from(users)
+		.where(eq(users.email, email))
+		.limit(1);
 
-  if (foundUsers.length === 0) {
-    return submission.reply({
-      fieldErrors: {
-        email: ["このメールアドレスは登録されていません"],
-      },
-    });
-  }
+	if (foundUsers.length === 0) {
+		return submission.reply({
+			fieldErrors: {
+				email: ["このメールアドレスは登録されていません"],
+			},
+		});
+	}
 
-  const { user: foundUser } = foundUsers[0];
+	const { user: foundUser } = foundUsers[0];
 
-  const isPasswordValid = await comparePasswords(password, foundUser.password);
+	const isPasswordValid = await comparePasswords(password, foundUser.password);
 
-  if (!isPasswordValid) {
-    return submission.reply({
-      formErrors: ["パスワードが間違っています"],
-    });
-  }
+	if (!isPasswordValid) {
+		return submission.reply({
+			formErrors: ["パスワードが間違っています"],
+		});
+	}
 
-  await setSession(foundUser);
-  redirect("/todos");
+	await setSession(foundUser);
+	redirect("/todos");
 };

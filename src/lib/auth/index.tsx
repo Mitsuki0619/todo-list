@@ -1,7 +1,7 @@
 "use client";
 
-import { createContext, useContext, type ReactNode } from "react";
 import type { User } from "@/lib/db/schema";
+import { type ReactNode, createContext, useContext } from "react";
 
 type UserContextType = {
 	userPromise: Promise<User | null>;

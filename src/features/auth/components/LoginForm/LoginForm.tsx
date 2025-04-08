@@ -1,19 +1,20 @@
 "use client";
 
-import { useActionState } from "react";
-import { login } from "../../actions/login";
-import { getInputProps, useForm } from "@conform-to/react";
-import { parseWithZod } from "@conform-to/zod";
-import { loginSchema } from "../../schemas/loginSchema";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardDescription } from "@/components/ui/card";
 import { CardHeader } from "@/components/ui/card";
 import { CardTitle } from "@/components/ui/card";
 import { CardContent } from "@/components/ui/card";
 import { CardFooter } from "@/components/ui/card";
 import { FieldErrors } from "@/components/ui/field-errors";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { getInputProps, useForm } from "@conform-to/react";
+import { parseWithZod } from "@conform-to/zod";
+import Link from "next/link";
+import { useActionState } from "react";
+import { login } from "../../actions/login";
+import { loginSchema } from "../../schemas/loginSchema";
 
 export function LoginForm() {
 	const [lastResult, action] = useActionState(login, undefined);
@@ -39,11 +40,14 @@ export function LoginForm() {
 			className="bg-white"
 			key={form.key}
 		>
-			<Card className="w-[350px] max-w-sm">
-				<CardHeader>
-					<CardTitle>ログイン</CardTitle>
+			<Card>
+				<CardHeader className="space-y-1">
+					<CardTitle className="text-2xl">ログイン</CardTitle>
+					<CardDescription>
+						メールアドレスとパスワードを入力してログインしてください
+					</CardDescription>
 				</CardHeader>
-				<CardContent className="space-y-4">
+				<CardContent className="grid gap-4">
 					<div className="space-y-2">
 						<Label htmlFor={fields.email.id}>メールアドレス</Label>
 						<Input
@@ -61,7 +65,15 @@ export function LoginForm() {
 						<FieldErrors errors={fields.password.errors} />
 					</div>
 				</CardContent>
-				<CardFooter className="flex justify-end">
+				<CardFooter className="flex justify-between items-center gap-4">
+					<div>
+						<span className="text-sm text-muted-foreground">
+							アカウントをお持ちでない方は
+						</span>
+						<Button variant="link" className="p-0 h-auto text-sm" asChild>
+							<Link href="/signup">新規登録</Link>
+						</Button>
+					</div>
 					<Button type="submit">ログイン</Button>
 				</CardFooter>
 			</Card>

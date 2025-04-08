@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-import { Home, CheckSquare, LogOut } from "lucide-react";
 import {
 	Sidebar,
 	SidebarContent,
@@ -12,10 +10,12 @@ import {
 	SidebarMenuItem,
 	SidebarRail,
 } from "@/components/ui/sidebar";
-import { Button } from "../ui/button";
 import { logout } from "@/features/auth/actions/logout";
-import { usePathname } from "next/navigation";
 import { useUser } from "@/lib/auth";
+import { CheckSquare, Home, LogOut } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Button } from "../ui/button";
 
 export function AppSidebar() {
 	const pathname = usePathname();

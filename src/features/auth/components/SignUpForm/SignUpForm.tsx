@@ -1,19 +1,20 @@
 "use client";
 
-import { useActionState } from "react";
-import { signUp } from "../../actions/signUp";
-import { getInputProps, useForm } from "@conform-to/react";
-import { parseWithZod } from "@conform-to/zod";
-import { signUpSchema } from "../../schemas/signUpSchema";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardDescription } from "@/components/ui/card";
 import { CardHeader } from "@/components/ui/card";
 import { CardTitle } from "@/components/ui/card";
 import { CardContent } from "@/components/ui/card";
 import { CardFooter } from "@/components/ui/card";
 import { FieldErrors } from "@/components/ui/field-errors";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { getInputProps, useForm } from "@conform-to/react";
+import { parseWithZod } from "@conform-to/zod";
+import Link from "next/link";
+import { useActionState } from "react";
+import { signUp } from "../../actions/signUp";
+import { signUpSchema } from "../../schemas/signUpSchema";
 
 export function SignUpForm() {
 	const [lastResult, action] = useActionState(signUp, undefined);
@@ -44,6 +45,9 @@ export function SignUpForm() {
 			<Card className="w-[350px] max-w-sm">
 				<CardHeader>
 					<CardTitle>アカウント新規登録</CardTitle>
+					<CardDescription>
+						必要情報を入力して新しいアカウントを作成してください
+					</CardDescription>
 				</CardHeader>
 				<CardContent className="space-y-4">
 					<div className="space-y-2">
@@ -81,7 +85,15 @@ export function SignUpForm() {
 						<FieldErrors errors={fields.confirmPassword.errors} />
 					</div>
 				</CardContent>
-				<CardFooter className="flex justify-end">
+				<CardFooter className="flex justify-between items-center gap-4">
+					<div>
+						<span className="text-sm text-muted-foreground">
+							すでにアカウントをお持ちの方は
+						</span>
+						<Button variant="link" className="p-0 h-auto text-sm" asChild>
+							<Link href="/login">ログイン</Link>
+						</Button>
+					</div>
 					<Button type="submit">登録</Button>
 				</CardFooter>
 			</Card>

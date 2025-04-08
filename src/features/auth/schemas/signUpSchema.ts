@@ -1,8 +1,8 @@
 import { z } from "zod";
 
+import { nameSchema } from "@/features/auth/schemas/nameSchema";
 import { emailSchema } from "./emailSchema";
 import { confirmPasswordSchema, passwordSchema } from "./passwordSchema";
-import { nameSchema } from "@/features/auth/schemas/nameSchema";
 
 export const signUpSchema = z
 	.object({

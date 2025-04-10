@@ -42,7 +42,7 @@ export function AppSidebar() {
 						<SidebarMenuButton asChild isActive={pathname === "/todos"}>
 							<Link href="/todos" className="flex items-center gap-2">
 								<CheckSquare className="h-4 w-4" />
-								<span>タスク</span>
+								<span>TODO一覧</span>
 							</Link>
 						</SidebarMenuButton>
 					</SidebarMenuItem>

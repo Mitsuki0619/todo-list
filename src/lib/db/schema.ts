@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm";
 import { integer, pgTable, serial, varchar } from "drizzle-orm/pg-core";
 
 export const users = pgTable("users", {
@@ -9,7 +10,9 @@ export const users = pgTable("users", {
 
 export const todos = pgTable("todos", {
 	id: serial("id").primaryKey(),
-	userId: integer().notNull(),
+	userId: integer()
+		.references(() => users.id, { onDelete: "cascade" })
+		.notNull(),
 	title: varchar({ length: 255 }).notNull(),
 	completed: integer().notNull().default(0),
 });

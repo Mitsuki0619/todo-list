@@ -1,9 +1,18 @@
-import { PageLayout } from "@/components/layout/PageLayout";
+import { TodoPage } from "@/features/todo/components/TodoPage/TodoPage";
+import type { Metadata } from "next";
 
-export default function TodoPage() {
-  return (
-    <PageLayout title="TODO 一覧">
-      <div className="flex items-center justify-center">todo</div>
-    </PageLayout>
-  );
+export const metadata: Metadata = {
+	title: "TODO一覧画面",
+	description: "TODO一覧画面",
+};
+
+export const experimental_ppr = true;
+
+export default async function Page({
+	searchParams,
+}: {
+	searchParams: Promise<{ page: number }>;
+}) {
+	const { page } = await searchParams;
+	return <TodoPage page={page} />;
 }

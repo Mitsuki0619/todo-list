@@ -10,7 +10,7 @@ import { useActionState, useOptimistic, useState, useTransition } from "react";
 import { toggleTodoComplete } from "../../actions/toggleTodoComplete";
 import { TodoTitleForm } from "../TodoTitleForm/TodoTitleForm";
 
-interface TodoListItemProps {
+export interface TodoListItemProps {
 	id: Todo["id"];
 	title: Todo["title"];
 	completed: Todo["completed"];

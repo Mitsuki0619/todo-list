@@ -1,6 +1,5 @@
 import { PageLayout } from "@/components/layout/PageLayout";
 import { TodoList } from "../TodoList/TodoList";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { TodoForm } from "../TodoForm/TodoForm";
 
 export async function TodoPage({ page }: { page: number }) {

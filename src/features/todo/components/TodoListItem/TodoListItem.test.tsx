@@ -49,7 +49,6 @@ vi.mock("react", async (importOriginal) => {
     useActionState: vi.fn((action, initialState) => [initialState, action]),
     // useOptimistic は useState を使って状態管理を模倣する
     useOptimistic: vi.fn((initialState) => {
-      // biome-ignore lint/correctness/useHookAtTopLevel: <explanation>
       const [state, setState] = useState(initialState); // useStateで状態を管理
       const addOptimistic = (newState: unknown) => {
         setState(newState); // addOptimisticで状態を更新

@@ -46,7 +46,7 @@ describe("TodoForm", async () => {
     const { submitButton } = setupForm();
     await user.click(submitButton);
     await waitFor(() => {
-      expect(screen.getAllByText("タイトルは必須です"));
+      expect(screen.getByText("タイトルは必須です"));
     });
     expect(mockAddTodo).not.toBeCalled();
   });
@@ -56,7 +56,7 @@ describe("TodoForm", async () => {
       "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
     );
     await waitFor(() => {
-      expect(screen.getAllByText("タイトルは255文字以内で入力してください"));
+      expect(screen.getByText("タイトルは255文字以内で入力してください"));
     });
     expect(mockAddTodo).not.toBeCalled();
   });
